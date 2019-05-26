@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+#
+# Download a Github user's stars information to local md file
+#
 #/ Usage:
 #/   ./downloadStars.sh <github_username>
 
@@ -9,7 +11,7 @@ expr "$*" : ".*--help" > /dev/null && usage
 set_var() {
     # Set global variables
     if [[ -z "$1" ]]; then
-        echo "Mising input"
+        echo "Mising username input!"
         usage
     fi
 
