@@ -18,4 +18,4 @@ A <username>.md will be created in `./stars/` folder with all starred repositori
 
 ## Limitation
 
-This script is calling GitHub API to download starred repositories of a user. However, GitHub API has a [rate limit](https://developer.github.com/v3/#rate-limiting). Usually, it's `60` requests per hour for non-authenticated usage. If you run this script and reach API limit, changing your IP address will make this script work again immediately. My apology, I'm too lazy to implement authenticated requests ¯\\_(ツ)_/¯.
+This script is calling GitHub API to download starred repositories of a user. However, GitHub API has a [rate limit](https://developer.github.com/v3/#rate-limiting). Usually, it's `60` requests per hour for non-authenticated usage. If you run this script and reach API limit, changing your IP address will make this script work again immediately. My apology, I'm too lazy to implement authenticated requests ¯\\\_(ツ)\_/¯.
