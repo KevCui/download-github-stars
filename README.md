@@ -3,9 +3,9 @@ downloadStars.sh
 
 ## Why?
 
-The accuracy of finding starred repository from Stars -> Filters is :expressionless:...
+The accuracy of finding starred repository in GitHub from Stars -> Filters is :expressionless:...
 
-So, this script is made to download all starred repositories of a certain user to local md file. Then, using your favorite search tool/command to find the repository :massage: from local file.
+So, this script is made to download all starred repositories of a user to local md file. Then, using your favorite search tool/command to find the repository you want from local file :massage:.
 
 ## How?
 
