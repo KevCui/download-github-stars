@@ -46,25 +46,27 @@ get_user_id() {
 }
 
 download_page() {
-    # Download stars on page $2 of user $1 to $_OUTPUT_FILE
+    # Download stars on page $2 of user $1, return it
     # $1: user id
     # $2: page number
     echo "Downloading $2..." >&2
-    $_HTTP "${_API}user/$1/starred?page=$2" -p b | grep -v "WARNING" | $_JQ -r '.[] | "[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description + "\n\n"' >> "$_OUTPUT_FILE"
+    $_HTTP "${_API}user/$1/starred?page=$2" -p b | grep -v "WARNING" | $_JQ -r '.[] | "[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description + "\n\n"'
 }
 
 main() {
     local num
     local id
+    local output
     set_var "$1"
     num=$(get_page_max_num)
     id=$(get_user_id)
-
-    echo > "$_OUTPUT_FILE"
+    output=""
 
     for (( i = 1; i <= num; i++ )); do
-        download_page "$id" "$i"
+        output="$output$(download_page "$id" "$i")"
     done
+
+    echo "$output" > "$_OUTPUT_FILE"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
