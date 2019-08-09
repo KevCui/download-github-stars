@@ -3,21 +3,29 @@
 # Download a Github user's stars information to local md file
 #
 #/ Usage:
-#/   ./downloadStars.sh <github_username>
+#/   ./downloadStars.sh <github_username> [<output_path>]
+
+set -e
+set -u
 
 usage() { grep '^#/' "$0" | cut -c4- ; exit 0 ; }
 expr "$*" : ".*--help" > /dev/null && usage
 
 set_var() {
     # Set global variables
-    if [[ -z "$1" ]]; then
+    if [[ -z "${1:-}" ]]; then
         echo "Mising username input!"
         usage
     fi
 
+    if [[ -z "${2:-}" ]]; then
+        _OUTPUT_DIR="./stars"
+    else
+        _OUTPUT_DIR="$2"
+    fi
+
     _USER="$1"
     _API="https://api.github.com/"
-    _OUTPUT_DIR="./stars"
     _OUTPUT_FILE="$_OUTPUT_DIR/$_USER.md"
 
     _HTTP=$(command -v http)
@@ -57,7 +65,7 @@ main() {
     local num
     local id
     local output
-    set_var "$1"
+    set_var "${1:-}"
     num=$(get_page_max_num)
     id=$(get_user_id)
     output=""
