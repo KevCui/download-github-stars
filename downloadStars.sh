@@ -25,14 +25,10 @@ set_var() {
     fi
 
     _USER="$1"
-    _API="https://api.github.com/"
+    _API="https://api.github.com"
     _OUTPUT_FILE="$_OUTPUT_DIR/$_USER.md"
 
-    _HTTP=$(command -v http)
-    if [ ! "$_HTTP" ]; then
-        echo "'http' command doesn't exist! Please install httpie."
-        exit 1
-    fi
+    _CURL=$(command -v curl)
 
     _JQ=$(command -v jq)
     if [ ! "$_JQ" ]; then
@@ -45,12 +41,12 @@ set_var() {
 
 get_page_max_num() {
     # Return max. page number
-    $_HTTP -p h "${_API}users/$_USER/starred" | grep -v "WARNING" | grep "Link:" | sed -E 's/.*page=//;s/>;.*//'
+    $_CURL -sSI "${_API}/users/$_USER/starred" | grep -v "WARNING" | grep "ink:" | sed -E 's/.*page=//;s/>;.*//'
 }
 
 get_user_id() {
     # Return user id
-    $_HTTP -p h "${_API}users/$_USER/starred" | grep -v "WARNING" | grep "Link:" | sed -E 's/.*\/user\///;s/\/.*//'
+    $_CURL -sSI "${_API}/users/$_USER/starred" | grep -v "WARNING" | grep "ink:" | sed -E 's/.*\/user\///;s/\/.*//'
 }
 
 download_page() {
@@ -58,7 +54,7 @@ download_page() {
     # $1: user id
     # $2: page number
     echo "Downloading $2..." >&2
-    $_HTTP "${_API}user/$1/starred?page=$2" -p b | grep -v "WARNING" | $_JQ -r '.[] | "---\n[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description'
+    $_CURL -sS "${_API}/user/$1/starred?page=$2" | grep -v "WARNING" | $_JQ -r '.[] | "---\n[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description'
 }
 
 main() {
