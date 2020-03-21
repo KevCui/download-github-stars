@@ -58,13 +58,11 @@ download_page() {
     # $1: user id
     # $2: page number
     echo "Downloading $2..." >&2
-    $_HTTP "${_API}user/$1/starred?page=$2" -p b | grep -v "WARNING" | $_JQ -r '.[] | "[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description + "\n\n"'
+    $_HTTP "${_API}user/$1/starred?page=$2" -p b | grep -v "WARNING" | $_JQ -r '.[] | "---\n[" + .full_name + "](" + .html_url + ")\nLanguage: " + .language + "\nDescription: " + .description'
 }
 
 main() {
-    local num
-    local id
-    local output
+    local num id output
     set_var "${1:-}"
     num=$(get_page_max_num)
     id=$(get_user_id)
