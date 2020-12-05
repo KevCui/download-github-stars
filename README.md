@@ -1,5 +1,4 @@
-downloadStars.sh
-================
+# downloadStars.sh
 
 ## Why?
 
@@ -11,10 +10,10 @@ So, this script is made to download all starred repositories of a user to local 
 
 ```
 Usage:
-  ./downloadStars.sh <github_username>
+  ./downloadStars.sh <github_username> [--md]
 ```
 
-A <username>.md will be created in `./stars/` folder with all starred repositories.
+By default, results will be stored in `./stars/<username>.json`. If the option `--md` is toggled, then results will be stored in a simple `./stars/<username>.md`.
 
 ## Limitation
 
