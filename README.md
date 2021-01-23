@@ -20,7 +20,7 @@ Options:
   -h | --help             display this help message
 ```
 
-By default, results will be stored in `./stars/<username>.json`. If the option `--md` is toggled, then results will be stored in a simple `./stars/<username>.md`.
+By default, results will be stored in `./stars/<username>.json`. If the option `-f md` is toggled, then results will be stored in a simple `./stars/<username>.md`.
 
 ## Limitation
 
