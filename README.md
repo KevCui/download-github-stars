@@ -10,7 +10,14 @@ So, this script is made to download all starred repositories of a user to local 
 
 ```
 Usage:
-  ./downloadStars.sh <github_username> [--md]
+  ./downloadStars.sh -u <github_username> [-f md|json] [-p <num>]
+
+Options:
+  -u <username>           github username
+  -f md|json              output format: md, json
+                          default format: json
+  -p <num>                start from page num
+  -h | --help             display this help message
 ```
 
 By default, results will be stored in `./stars/<username>.json`. If the option `--md` is toggled, then results will be stored in a simple `./stars/<username>.md`.
