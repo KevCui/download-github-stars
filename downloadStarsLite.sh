@@ -49,10 +49,6 @@ remove_space() {
     sed -E '/^[[:space:]]*$/d;s/^[[:space:]]+//;s/[[:space:]]+$//;'
 }
 
-combine_lines() {
-    tr '\n' ' '
-}
-
 download_star_page() {
     # $1: URL
     # $2: output html
@@ -86,7 +82,7 @@ get_star_data() {
             | remove_space)"
         d="$("$_PUP" 'p[itemprop="description"] text{}' --charset UTF-8 -p <<< "$p" \
             | remove_space \
-            | combine_lines)"
+            | tr '\n' ' ')"
         write_output "$n" "$l" "$d"
     done
 }
