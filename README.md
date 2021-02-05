@@ -4,9 +4,11 @@
 
 The accuracy of finding starred repository in GitHub from Stars -> Filters is :expressionless:...
 
-So, this script is made to download all starred repositories of a user to local md file. Then, using your favorite search tool/command to find the repository you want from local file :massage:.
+So, this script is made to download all starred repositories of a user to local md/json file. Then, using your favorite search tool/command to find the repository you want from local file :massage:.
 
 ## How?
+
+### downloadStars.sh
 
 ```
 Usage:
@@ -22,9 +24,21 @@ Options:
 
 By default, results will be stored in `./stars/<username>.json`. If the option `-f md` is toggled, then results will be stored in a simple `./stars/<username>.md`.
 
-## Limitation
+#### Limitation
 
 This script is calling GitHub API to download starred repositories of a user. However, GitHub API has a [rate limit](https://developer.github.com/v3/#rate-limiting). Usually, it's `60` requests per hour for non-authenticated usage. If you run this script and reach API limit, changing your IP address will make this script work again immediately. My apology, I'm too lazy to implement authenticated requests ¯\\\_(ツ)\_/¯.
+
+### downloadStarsLite.sh
+
+```
+Usage:
+  ./downloadStarsLite.sh <github_username>
+
+Options:
+  -h | --help             display this help message
+```
+
+As a lite (quick & dirty) version, `downloadStarsLite.sh` supports `md` output only. It goes through stars tab page by page. Therefore, it doesn't use GitHub API and it has **no rate limit**.
 
 ---
 
