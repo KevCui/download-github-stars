@@ -89,7 +89,7 @@ get_star_data() {
 
 get_next_page_url() {
     # $1: output html
-    "$_PUP" '.btn-outline '< "$1" \
+    "$_PUP" '.BtnGroup'< "$1" \
         | grep 'after=' \
         | sed -E 's/.*href="//' \
         | sed -E 's/">//'
