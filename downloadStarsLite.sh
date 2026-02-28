@@ -71,7 +71,7 @@ get_star_data() {
     # $1: output html
     local len p n l d
     len="$("$_PUP" 'div .d-block' < "$1" \
-        | grep -c 'col-12 d-block width-full py-4 border-bottom')"
+        | grep -c 'col-12 d-block width-full tmp-py-4 border-bottom')"
     len="$((len + 2))"
 
     for (( i = 2; i < len; i++ )); do
@@ -92,7 +92,8 @@ get_next_page_url() {
     "$_PUP" '.BtnGroup'< "$1" \
         | grep 'after=' \
         | sed -E 's/.*href="//' \
-        | sed -E 's/">//'
+        | sed -E 's/">//' \
+        | sed -E 's/\&amp;/\&/'
 }
 
 main() {
